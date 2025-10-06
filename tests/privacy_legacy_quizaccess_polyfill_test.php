@@ -99,7 +99,7 @@ class core_privacy_legacy_quizaccess_polyfill_test extends advanced_testcase {
  */
 class test_privacy_legacy_quizaccess_polyfill_provider implements
         \core_privacy\local\metadata\provider,
-        \mod_finalquiz\privacy\quizaccess_provider {
+        \mod_finalquiz\privacy\finalquizaccess_provider {
 
     use \mod_finalquiz\privacy\legacy_quizaccess_polyfill;
     use \core_privacy\local\legacy_polyfill;
@@ -112,7 +112,7 @@ class test_privacy_legacy_quizaccess_polyfill_provider implements
     /**
      * Export all user data for the quizaccess plugin.
      *
-     * @param \quiz $quiz
+     * @param \finalquiz $quiz
      * @param \stdClass $user
      */
     protected static function _export_quizaccess_user_data($quiz, $user) {
@@ -122,7 +122,7 @@ class test_privacy_legacy_quizaccess_polyfill_provider implements
     /**
      * Deletes all user data for the given context.
      *
-     * @param \quiz $quiz
+     * @param \finalquiz $quiz
      */
     protected static function _delete_quizaccess_data_for_all_users_in_context($quiz) {
         static::$mock->get_return_value(__FUNCTION__, func_get_args());
@@ -131,7 +131,7 @@ class test_privacy_legacy_quizaccess_polyfill_provider implements
     /**
      * Delete personal data for the given user and context.
      *
-     * @param   \quiz           $quiz The quiz being deleted
+     * @param   \finalquiz           $quiz The quiz being deleted
      * @param   \stdClass       $user The user to export data for
      */
     protected static function _delete_quizaccess_data_for_user($quiz, $user) {

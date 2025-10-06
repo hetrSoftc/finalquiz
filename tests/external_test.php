@@ -163,7 +163,7 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
     /*
      * Test get quizzes by courses
      */
-    public function test_mod_finalquiz_get_quizzes_by_courses() {
+    public function test_mod_finalquiz_get_finalquizzes_by_courses() {
         global $DB;
 
         // Create additional course.
@@ -187,7 +187,7 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
 
         self::setUser($this->student);
 
-        $returndescription = mod_finalquiz_external::get_quizzes_by_courses_returns();
+        $returndescription = mod_finalquiz_external::get_finalquizzes_by_courses_returns();
 
         // Create what we expect to be returned when querying the two courses.
         // First for the student user.
@@ -235,14 +235,14 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
         $expectedquizzes = array($expected2, $expected1);
 
         // Call the external function passing course ids.
-        $result = mod_finalquiz_external::get_quizzes_by_courses(array($course2->id, $this->course->id));
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses(array($course2->id, $this->course->id));
         $result = external_api::clean_returnvalue($returndescription, $result);
 
         $this->assertEquals($expectedquizzes, $result['quizzes']);
         $this->assertCount(0, $result['warnings']);
 
         // Call the external function without passing course id.
-        $result = mod_finalquiz_external::get_quizzes_by_courses();
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses();
         $result = external_api::clean_returnvalue($returndescription, $result);
         $this->assertEquals($expectedquizzes, $result['quizzes']);
         $this->assertCount(0, $result['warnings']);
@@ -252,12 +252,12 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
         array_shift($expectedquizzes);
 
         // Call the external function without passing course id.
-        $result = mod_finalquiz_external::get_quizzes_by_courses();
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses();
         $result = external_api::clean_returnvalue($returndescription, $result);
         $this->assertEquals($expectedquizzes, $result['quizzes']);
 
         // Call for the second course we unenrolled the user from, expected warning.
-        $result = mod_finalquiz_external::get_quizzes_by_courses(array($course2->id));
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses(array($course2->id));
         $this->assertCount(1, $result['warnings']);
         $this->assertEquals('1', $result['warnings'][0]['warningcode']);
         $this->assertEquals($course2->id, $result['warnings'][0]['itemid']);
@@ -269,14 +269,14 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
             $expectedquizzes[0][$field] = $quiz1->{$field};
         }
 
-        $result = mod_finalquiz_external::get_quizzes_by_courses();
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses();
         $result = external_api::clean_returnvalue($returndescription, $result);
         $this->assertEquals($expectedquizzes, $result['quizzes']);
 
         // Admin also should get all the information.
         self::setAdminUser();
 
-        $result = mod_finalquiz_external::get_quizzes_by_courses(array($this->course->id));
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses(array($this->course->id));
         $result = external_api::clean_returnvalue($returndescription, $result);
         $this->assertEquals($expectedquizzes, $result['quizzes']);
 
@@ -288,7 +288,7 @@ class mod_finalquiz_external_testcase extends externallib_advanced_testcase {
         $quiz2->timeclose = time() - DAYSECS;
         $DB->update_record('finalquiz', $quiz2);
 
-        $result = mod_finalquiz_external::get_quizzes_by_courses();
+        $result = mod_finalquiz_external::get_finalquizzes_by_courses();
         $result = external_api::clean_returnvalue($returndescription, $result);
         $this->assertCount(2, $result['quizzes']);
         // We only see a limited set of fields.

@@ -41,12 +41,12 @@ require_once($CFG->dirroot . '/mod/finalquiz/locallib.php');
 class mod_finalquiz_external extends external_api {
 
     /**
-     * Describes the parameters for get_quizzes_by_courses.
+     * Describes the parameters for get_finalquizzes_by_courses.
      *
      * @return external_function_parameters
      * @since Moodle 3.1
      */
-    public static function get_quizzes_by_courses_parameters() {
+    public static function get_finalquizzes_by_courses_parameters() {
         return new external_function_parameters (
             array(
                 'courseids' => new external_multiple_structure(
@@ -64,7 +64,7 @@ class mod_finalquiz_external extends external_api {
      * @return array of quizzes details
      * @since Moodle 3.1
      */
-    public static function get_quizzes_by_courses($courseids = array()) {
+    public static function get_finalquizzes_by_courses($courseids = array()) {
         global $USER;
 
         $warnings = array();
@@ -73,7 +73,7 @@ class mod_finalquiz_external extends external_api {
         $params = array(
             'courseids' => $courseids,
         );
-        $params = self::validate_parameters(self::get_quizzes_by_courses_parameters(), $params);
+        $params = self::validate_parameters(self::get_finalquizzes_by_courses_parameters(), $params);
 
         $mycourses = array();
         if (empty($params['courseids'])) {
@@ -155,12 +155,12 @@ class mod_finalquiz_external extends external_api {
     }
 
     /**
-     * Describes the get_quizzes_by_courses return value.
+     * Describes the get_finalquizzes_by_courses return value.
      *
      * @return external_single_structure
      * @since Moodle 3.1
      */
-    public static function get_quizzes_by_courses_returns() {
+    public static function get_finalquizzes_by_courses_returns() {
         return new external_single_structure(
             array(
                 'quizzes' => new external_multiple_structure(

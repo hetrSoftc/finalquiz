@@ -111,7 +111,7 @@ class mod_finalquiz_lib_testcase extends advanced_testcase {
         // Get the random question.
         $randomq = $DB->get_record('question', array('qtype' => 'random'));
 
-        quiz_delete_instance($quiz->id);
+        finalquiz_delete_instance($quiz->id);
 
         // Check that the random question was deleted.
         $count = $DB->count_records('question', array('id' => $randomq->id));

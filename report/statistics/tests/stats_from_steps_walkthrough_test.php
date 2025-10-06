@@ -379,7 +379,7 @@ class quiz_report_statistics_from_steps_testcase extends mod_finalquiz_attempt_w
 
         // We will create some quiz and question stat calculator instances and some response analyser instances, just in order
         // to check the last analysed time then returned.
-        $quizcalc = new \quiz_statistics\calculator();
+        $quizcalc = new \finalquiz_statistics\calculator();
         // Should not be a delay of more than one second between the calculation of stats above and here.
         $this->assertTimeCurrent($quizcalc->get_last_calculated_time($qubaids));
 

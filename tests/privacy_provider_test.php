@@ -157,7 +157,7 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
 
         $attempt = $attemptobj->get_attempt();
         $this->assertTrue(isset($attemptdata->state));
-        $this->assertEquals(\quiz_attempt::state_name($attemptobj->get_state()), $attemptdata->state);
+        $this->assertEquals(\finalquiz_attempt::state_name($attemptobj->get_state()), $attemptdata->state);
         $this->assertTrue(isset($attemptdata->timestart));
         $this->assertTrue(isset($attemptdata->timefinish));
         $this->assertTrue(isset($attemptdata->timemodified));
@@ -181,7 +181,7 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
         $this->setUser();
         provider::delete_data_for_user($approvedcontextlist);
         $this->expectException(\dml_missing_record_exception::class);
-        \quiz_attempt::create($attemptobj->get_quizid());
+        \finalquiz_attempt::create($attemptobj->get_quizid());
     }
 
     /**

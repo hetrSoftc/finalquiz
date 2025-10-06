@@ -141,7 +141,7 @@ class finalquizaccess_safeexambrowser extends finalquiz_access_rule_base {
 
     /**
      * Delete any rule-specific settings when the quiz is deleted. This is called
-     * from {@link quiz_delete_instance()} in lib.php.
+     * from {@link finalquiz_delete_instance()} in lib.php.
      *
      * @param object $quiz the data from the database, including $quiz->id
      *      which is the id of the quiz being deleted.

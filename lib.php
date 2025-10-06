@@ -1776,7 +1776,7 @@ function finalquiz_attempt_summary_link_to_reports($quiz, $cm, $context, $return
  * @param string $feature FEATURE_xx constant for requested feature
  * @return bool True if quiz supports feature
  */
-function quiz_supports($feature) {
+function finalquiz_supports($feature) {
     switch($feature) {
         case FEATURE_GROUPS:                    return true;
         case FEATURE_GROUPINGS:                 return true;

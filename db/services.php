@@ -28,9 +28,9 @@ defined('MOODLE_INTERNAL') || die;
 
 $functions = array(
 
-    'mod_finalquiz_get_quizzes_by_courses' => array(
+    'mod_finalquiz_get_finalquizzes_by_courses' => array(
         'classname'     => 'mod_finalquiz_external',
-        'methodname'    => 'get_quizzes_by_courses',
+        'methodname'    => 'get_finalquizzes_by_courses',
         'description'   => 'Returns a list of quizzes in a provided list of courses,
                             if no list is provided all quizzes that the user can view will be returned.',
         'type'          => 'read',

@@ -37,7 +37,7 @@ class qubaids_for_users_attempts extends \qubaid_join {
     /**
      * Constructor.
      *
-     * This takes the same arguments as {@link quiz_get_user_attempts()}.
+     * This takes the same arguments as {@link finalquiz_get_user_attempts()}.
      *
      * @param int $quizid the quiz id.
      * @param int $userid the userid.
@@ -58,14 +58,14 @@ class qubaids_for_users_attempts extends \qubaid_join {
 
             case 'finished':
                 $where .= ' AND state IN (:state1, :state2)';
-                $params['state1'] = \quiz_attempt::FINISHED;
-                $params['state2'] = \quiz_attempt::ABANDONED;
+                $params['state1'] = \finalquiz_attempt::FINISHED;
+                $params['state2'] = \finalquiz_attempt::ABANDONED;
                 break;
 
             case 'unfinished':
                 $where .= ' AND state IN (:state1, :state2)';
-                $params['state1'] = \quiz_attempt::IN_PROGRESS;
-                $params['state2'] = \quiz_attempt::OVERDUE;
+                $params['state1'] = \finalquiz_attempt::IN_PROGRESS;
+                $params['state2'] = \finalquiz_attempt::OVERDUE;
                 break;
         }
 

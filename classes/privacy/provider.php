@@ -216,7 +216,7 @@ class provider implements
         $quizzes = $DB->get_recordset_sql($sql, $params);
         foreach ($quizzes as $quiz) {
             list($course, $cm) = get_course_and_cm_from_cmid($quiz->cmid, 'finalquiz');
-            $quizobj = new \quiz($quiz, $cm, $course);
+            $quizobj = new \finalquiz($quiz, $cm, $course);
             $context = $quizobj->get_context();
 
             $quizdata = \core_privacy\local\request\helper::get_context_data($context, $contextlist->get_user());
@@ -255,7 +255,7 @@ class provider implements
                 ];
             foreach (array_keys($components) as $component) {
                 $classname = manager::get_provider_classname_for_component("quizaccess_$component");
-                if (class_exists($classname) && is_subclass_of($classname, quizaccess_provider::class)) {
+                if (class_exists($classname) && is_subclass_of($classname, finalquizaccess_provider::class)) {
                     $result = component_class_callback($classname, 'export_quizaccess_user_data', $exportparams);
                     if (count((array) $result)) {
                         $quizdata->accessdata->$component = $result;
@@ -293,13 +293,13 @@ class provider implements
             return;
         }
 
-        $quizobj = \quiz::create($cm->instance);
+        $quizobj = \finalquiz::create($cm->instance);
         $quiz = $quizobj->get_quiz();
 
         // Handle the 'finalquizaccess' subplugin.
         manager::plugintype_class_callback(
                 'finalquizaccess',
-                quizaccess_provider::class,
+                finalquizaccess_provider::class,
                 'delete_subplugin_data_for_all_users_in_context',
                 [$quizobj]
             );
@@ -332,14 +332,14 @@ class provider implements
             }
 
             // Fetch the details of the data to be removed.
-            $quizobj = \quiz::create($cm->instance);
+            $quizobj = \finalquiz::create($cm->instance);
             $quiz = $quizobj->get_quiz();
             $user = $contextlist->get_user();
 
             // Handle the 'finalquizaccess' quizaccess.
             manager::plugintype_class_callback(
                     'finalquizaccess',
-                    quizaccess_provider::class,
+                    finalquizaccess_provider::class,
                     'delete_quizaccess_data_for_user',
                     [$quizobj, $user]
                 );
@@ -416,7 +416,7 @@ class provider implements
 
                 // Store the quiz attempt data.
                 $data = (object) [
-                    'state' => \quiz_attempt::state_name($attempt->state),
+                    'state' => \finalquiz_attempt::state_name($attempt->state),
                 ];
 
                 if (!empty($attempt->timestart)) {

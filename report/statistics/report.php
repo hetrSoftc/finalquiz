@@ -153,7 +153,7 @@ class finalquiz_statistics_report extends finalquiz_default_report {
                 $this->get_all_stats_and_analysis($quiz, $whichattempts, $whichtries, $groupstudentsjoins, $questions, $progress);
         } else {
             // Or create empty stats containers.
-            $quizstats = new \quiz_statistics\calculated($whichattempts);
+            $quizstats = new \finalquiz_statistics\calculated($whichattempts);
             $questionstats = new \core_question\statistics\questions\all_calculated_for_qubaid_condition();
         }
 

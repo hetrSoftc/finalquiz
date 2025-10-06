@@ -28,7 +28,7 @@ use core\plugininfo\base;
 defined('MOODLE_INTERNAL') || die();
 
 
-class quiz extends base {
+class finalquiz extends base {
     public function is_uninstall_allowed() {
         return true;
     }
