@@ -1021,7 +1021,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
             $slottagrecords = array_merge($slottagrecords, $records);
         }
 
-        $DB->insert_records('quiz_slot_tags', $slottagrecords);
+        $DB->insert_records('finalquiz_slot_tags', $slottagrecords);
 
         $actualslottags = $structure->get_slot_tags_for_slot_id($slotid);
         $actual = array_map(function($slottag) {

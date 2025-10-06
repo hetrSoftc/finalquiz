@@ -121,7 +121,7 @@ class mod_finalquiz_lib_testcase extends advanced_testcase {
         $this->assertEquals(1, $count);
 
         // Check that all the slots were removed.
-        $count = $DB->count_records('quiz_slots', array('quizid' => $quiz->id));
+        $count = $DB->count_records('finalquiz_slots', array('quizid' => $quiz->id));
         $this->assertEquals(0, $count);
 
         // Check that the quiz was removed.

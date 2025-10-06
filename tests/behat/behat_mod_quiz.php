@@ -143,8 +143,8 @@ class behat_mod_finalquiz extends behat_question_base {
             // Require previous.
             if (array_key_exists('requireprevious', $questiondata)) {
                 if ($questiondata['requireprevious'] === '1') {
-                    $slot = $DB->get_field('quiz_slots', 'MAX(slot)', array('quizid' => $quiz->id));
-                    $DB->set_field('quiz_slots', 'requireprevious', 1,
+                    $slot = $DB->get_field('finalquiz_slots', 'MAX(slot)', array('quizid' => $quiz->id));
+                    $DB->set_field('finalquiz_slots', 'requireprevious', 1,
                             array('quizid' => $quiz->id, 'slot' => $slot));
                 } else if ($questiondata['requireprevious'] !== '' && $questiondata['requireprevious'] !== '0') {
                     throw new ExpectationException('Require previous for question "' .
@@ -233,7 +233,7 @@ class behat_mod_finalquiz extends behat_question_base {
             }
         }
 
-        if ($section->firstslot > $DB->count_records('quiz_slots', array('quizid' => $quiz->id))) {
+        if ($section->firstslot > $DB->count_records('finalquiz_slots', array('quizid' => $quiz->id))) {
             throw new ExpectationException('The section firstslot must be less than the total number of slots in the quiz.',
                     $this->getSession());
         }

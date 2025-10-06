@@ -131,7 +131,7 @@ class slot_random {
     public function insert($page) {
         global $DB;
 
-        $slots = $DB->get_records('quiz_slots', array('quizid' => $this->record->quizid),
+        $slots = $DB->get_records('finalquiz_slots', array('quizid' => $this->record->quizid),
                 'slot', 'id, slot, page');
 
         $trans = $DB->start_delegated_transaction();
@@ -152,7 +152,7 @@ class slot_random {
             $lastslotbefore = 0;
             foreach (array_reverse($slots) as $otherslot) {
                 if ($otherslot->page > $page) {
-                    $DB->set_field('quiz_slots', 'slot', $otherslot->slot + 1, array('id' => $otherslot->id));
+                    $DB->set_field('finalquiz_slots', 'slot', $otherslot->slot + 1, array('id' => $otherslot->id));
                 } else {
                     $lastslotbefore = $otherslot->slot;
                     break;
@@ -177,7 +177,7 @@ class slot_random {
             }
         }
 
-        $this->record->id = $DB->insert_record('quiz_slots', $this->record);
+        $this->record->id = $DB->insert_record('finalquiz_slots', $this->record);
 
         if (!empty($this->tags)) {
             $recordstoinsert = [];
@@ -188,7 +188,7 @@ class slot_random {
                     'tagname' => $tag->name
                 ];
             }
-            $DB->insert_records('quiz_slot_tags', $recordstoinsert);
+            $DB->insert_records('finalquiz_slot_tags', $recordstoinsert);
         }
 
         $trans->allow_commit();

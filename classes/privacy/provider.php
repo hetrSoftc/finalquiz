@@ -103,7 +103,7 @@ class provider implements
         // The table 'quiz_sections' contains data about the structure of a quiz.
         // It does not contain any user identifying data and does not need a mapping.
 
-        // The table 'quiz_slots' contains data about the structure of a quiz.
+        // The table 'finalquiz_slots' contains data about the structure of a quiz.
         // It does not contain any user identifying data and does not need a mapping.
 
         // The table 'quiz_reports' does not contain any user identifying data and does not need a mapping.

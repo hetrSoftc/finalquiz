@@ -122,7 +122,7 @@ class backup_finalquiz_activity_structure_step extends backup_questions_activity
         // Define sources.
         $quiz->set_source_table('finalquiz', array('id' => backup::VAR_ACTIVITYID));
 
-        $qinstance->set_source_table('quiz_slots',
+        $qinstance->set_source_table('finalquiz_slots',
                 array('quizid' => backup::VAR_PARENTID));
 
         $qinstancetag->set_source_table('finalquiz_slot_tags',

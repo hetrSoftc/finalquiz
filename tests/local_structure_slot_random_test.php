@@ -101,7 +101,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         quiz_add_random_questions($quiz, 0, $category->id, 1, false);
 
         // Get the random question's id. It is at the first slot.
-        $questionid = $DB->get_field('quiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
+        $questionid = $DB->get_field('finalquiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
 
         $randomslotdata = new stdClass();
         $randomslotdata->quizid = $quiz->id;
@@ -135,7 +135,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         quiz_add_random_questions($quiz, 0, $category->id, 1, false);
 
         // Get the random question's id. It is at the first slot.
-        $questionid = $DB->get_field('quiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
+        $questionid = $DB->get_field('finalquiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
 
         $randomslotdata = new stdClass();
         $randomslotdata->quizid = $quiz->id;
@@ -173,7 +173,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         quiz_add_random_questions($quiz, 0, $category->id, 1, false);
 
         // Get the random question's id. It is at the first slot.
-        $questionid = $DB->get_field('quiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
+        $questionid = $DB->get_field('finalquiz_slots', 'questionid', array('quizid' => $quiz->id, 'slot' => 1));
 
         $randomslotdata = new stdClass();
         $randomslotdata->quizid = $quiz->id;
@@ -390,9 +390,9 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         $randomslot->insert(1); // Put the question on the first page of the quiz.
 
         // Get the random question's quiz_slot. It is at the first slot.
-        $quizslot = $DB->get_record('quiz_slots', array('quizid' => $quiz->id, 'slot' => 1));
+        $quizslot = $DB->get_record('finalquiz_slots', array('quizid' => $quiz->id, 'slot' => 1));
         // Get the random question's tags from quiz_slot_tags. It is at the first slot.
-        $quizslottags = $DB->get_records('quiz_slot_tags', array('slotid' => $quizslot->id));
+        $quizslottags = $DB->get_records('finalquiz_slot_tags', array('slotid' => $quizslot->id));
 
         $this->assertEquals($question->id, $quizslot->questionid);
         $this->assertEquals($category->id, $quizslot->questioncategoryid);

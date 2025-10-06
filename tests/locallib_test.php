@@ -516,7 +516,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
         list($quiz, $tags) = $this->setup_finalquiz_and_tags(1, 1, [['foo', 'bar']], ['baz']);
 
         // Get the random question's slotid. It is at the second slot.
-        $slotid = $DB->get_field('quiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
+        $slotid = $DB->get_field('finalquiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
         $slottags = quiz_retrieve_slot_tags($slotid);
 
         $this->assertEquals(
@@ -539,7 +539,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
         list($quiz, $tags) = $this->setup_finalquiz_and_tags(1, 1, [['foo', 'bar']], ['baz']);
 
         // Get the random question's slotid. It is at the second slot.
-        $slotid = $DB->get_field('quiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
+        $slotid = $DB->get_field('finalquiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
         $slottags = quiz_retrieve_slot_tags($slotid);
 
         // Now remove the foo tag and check again.
@@ -566,7 +566,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
         list($quiz, $tags) = $this->setup_finalquiz_and_tags(1, 1, [['foo', 'bar']]);
 
         // Get the standard question's slotid. It is at the first slot.
-        $slotid = $DB->get_field('quiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 1));
+        $slotid = $DB->get_field('finalquiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 1));
 
         // There should be no slot tags for a non-random question.
         $this->assertCount(0, quiz_retrieve_slot_tags($slotid));
@@ -581,7 +581,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
         list($quiz, $tags) = $this->setup_finalquiz_and_tags(1, 1, [['foo', 'bar']], ['baz']);
 
         // Get the random question's slotid. It is at the second slot.
-        $slotid = $DB->get_field('quiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
+        $slotid = $DB->get_field('finalquiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 2));
         $tagids = quiz_retrieve_slot_tag_ids($slotid);
 
         $this->assertEquals([$tags['foo']->id, $tags['bar']->id], $tagids, '', 0.0, 10, true);
@@ -596,7 +596,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
         list($quiz, $tags) = $this->setup_finalquiz_and_tags(1, 1, [['foo', 'bar']], ['baz']);
 
         // Get the standard question's slotid. It is at the first slot.
-        $slotid = $DB->get_field('quiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 1));
+        $slotid = $DB->get_field('finalquiz_slots', 'id', array('quizid' => $quiz->id, 'slot' => 1));
         $tagids = quiz_retrieve_slot_tag_ids($slotid);
 
         $this->assertEquals([], $tagids, '', 0.0, 10, true);
@@ -799,7 +799,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
             $unusedtags
         );
 
-        $slots = $DB->get_records('quiz_slots', ['quizid' => $quiz->id]);
+        $slots = $DB->get_records('finalquiz_slots', ['quizid' => $quiz->id]);
         $slotids = [];
         $slotsbynumber = [];
         foreach ($slots as $slot) {
@@ -815,7 +815,7 @@ class mod_finalquiz_locallib_testcase extends advanced_testcase {
             }, $removeslottagids);
             list($sql, $params) = $DB->get_in_or_equal($idstonull);
             // Null out the tagid column to force the code to look up the tag by name.
-            $DB->set_field_select('quiz_slot_tags', 'tagid', null, "slotid {$sql}", $params);
+            $DB->set_field_select('finalquiz_slot_tags', 'tagid', null, "slotid {$sql}", $params);
         }
 
         $slottagsbyslotids = quiz_retrieve_tags_for_slot_ids($slotids);
