@@ -94,7 +94,7 @@ class slot_random {
      *
      * @param \stdClass $quiz The qui object.
      */
-    public function set_quiz($quiz) {
+    public function set_finalquiz($quiz) {
         $this->quiz = $quiz;
         $this->record->quizid = $quiz->id;
     }

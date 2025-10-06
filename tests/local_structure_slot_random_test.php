@@ -118,7 +118,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         $this->assertEquals($quiz, $randomslot->get_finalquiz());
     }
 
-    public function test_set_quiz() {
+    public function test_set_finalquiz() {
         global $SITE, $DB;
 
         $this->resetAfterTest();
@@ -149,7 +149,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         // The create_instance had injected an additional cmid propery to the quiz. Let's remove that.
         unset($quiz->cmid);
 
-        $randomslot->set_quiz($quiz);
+        $randomslot->set_finalquiz($quiz);
 
         $rc = new ReflectionClass('\mod_finalquiz\local\structure\slot_random');
         $rcp = $rc->getProperty('finalquiz');
