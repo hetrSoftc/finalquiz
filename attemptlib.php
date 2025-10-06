@@ -568,10 +568,10 @@ class finalquiz_attempt {
 
         $this->quba = question_engine::load_questions_usage_by_activity($this->attempt->uniqueid);
         $this->slots = $DB->get_records('finalquiz_slots',
-                array('quizid' => $this->get_quizid()), 'slot',
+                array('quizid' => $this->get_finalquizid()), 'slot',
                 'slot, requireprevious, questionid, includingsubcategories');
         $this->sections = array_values($DB->get_records('finalquiz_sections',
-                array('quizid' => $this->get_quizid()), 'firstslot'));
+                array('quizid' => $this->get_finalquizid()), 'firstslot'));
 
         $this->link_sections_and_slots();
         $this->determine_layout();
@@ -1690,7 +1690,7 @@ class finalquiz_attempt {
      * @return mod_finalquiz_links_to_other_attempts containing array int => null|moodle_url.
      */
     public function links_to_other_attempts(moodle_url $url) {
-        $attempts = quiz_get_user_attempts($this->get_quiz()->id, $this->attempt->userid, 'all');
+        $attempts = quiz_get_user_attempts($this->get_finalquiz()->id, $this->attempt->userid, 'all');
         if (count($attempts) <= 1) {
             return false;
         }

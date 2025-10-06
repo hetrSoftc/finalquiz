@@ -181,7 +181,7 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
         $this->setUser();
         provider::delete_data_for_user($approvedcontextlist);
         $this->expectException(\dml_missing_record_exception::class);
-        \finalquiz_attempt::create($attemptobj->get_quizid());
+        \finalquiz_attempt::create($attemptobj->get_finalquizid());
     }
 
     /**
@@ -219,7 +219,7 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
         $context = $quizobj->get_context();
 
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
         // Start the attempt.
         $attempt = quiz_create_attempt($quizobj, 1, false, $starttime, true, $user->id);
@@ -292,13 +292,13 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
         provider::delete_data_for_all_users_in_context($context);
 
         // The quiz attempt should have been deleted from this quiz.
-        $this->assertCount(0, $DB->get_records('finalquiz_attempts', ['finalquiz' => $quizobj->get_quizid()]));
-        $this->assertCount(0, $DB->get_records('quiz_overrides', ['finalquiz' => $quizobj->get_quizid()]));
+        $this->assertCount(0, $DB->get_records('finalquiz_attempts', ['finalquiz' => $quizobj->get_finalquizid()]));
+        $this->assertCount(0, $DB->get_records('quiz_overrides', ['finalquiz' => $quizobj->get_finalquizid()]));
         $this->assertCount(0, $DB->get_records('question_attempts', ['questionusageid' => $quba->get_id()]));
 
         // But not for the other quiz.
-        $this->assertNotCount(0, $DB->get_records('finalquiz_attempts', ['finalquiz' => $otherquizobj->get_quizid()]));
-        $this->assertNotCount(0, $DB->get_records('quiz_overrides', ['finalquiz' => $otherquizobj->get_quizid()]));
+        $this->assertNotCount(0, $DB->get_records('finalquiz_attempts', ['finalquiz' => $otherquizobj->get_finalquizid()]));
+        $this->assertNotCount(0, $DB->get_records('quiz_overrides', ['finalquiz' => $otherquizobj->get_finalquizid()]));
         $this->assertNotCount(0, $DB->get_records('question_attempts', ['questionusageid' => $otherquba->get_id()]));
     }
 
@@ -402,7 +402,7 @@ class mod_finalquiz_privacy_provider_testcase extends \core_privacy\tests\provid
         $context = $quizobj->get_context();
 
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
         // Start the attempt.
         $attempt = quiz_create_attempt($quizobj, 1, false, $starttime, false, $user->id);

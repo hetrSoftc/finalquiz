@@ -34,7 +34,7 @@ $quizobj = finalquiz::create($quizid);
 require_login($quizobj->get_course(), false, $quizobj->get_cm());
 require_capability('mod/finalquiz:manage', $quizobj->get_context());
 if (finalquiz_has_attempts($quizid)) {
-    $reportlink = quiz_attempt_summary_link_to_reports($quizobj->get_quiz(),
+    $reportlink = quiz_attempt_summary_link_to_reports($quizobj->get_finalquiz(),
                     $quizobj->get_cm(), $quizobj->get_context());
     throw new \moodle_exception('cannoteditafterattempts', 'finalquiz',
             new moodle_url('/mod/finalquiz/edit.php', array('cmid' => $quizobj->get_cmid())), $reportlink);

@@ -63,7 +63,7 @@ class finalquizaccess_safeexambrowser extends finalquiz_access_rule_base {
      */
     public static function make(finalquiz $quizobj, $timenow, $canignoretimelimits) {
 
-        if (empty($quizobj->get_quiz()->safeexambrowser_allowedkeys)) {
+        if (empty($quizobj->get_finalquiz()->safeexambrowser_allowedkeys)) {
             return null;
         }
 

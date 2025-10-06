@@ -56,7 +56,7 @@ abstract class quiz_access_rule_base {
      */
     public function __construct($quizobj, $timenow) {
         $this->quizobj = $quizobj;
-        $this->quiz = $quizobj->get_quiz();
+        $this->quiz = $quizobj->get_finalquiz();
         $this->timenow = $timenow;
     }
 

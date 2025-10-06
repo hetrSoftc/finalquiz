@@ -97,7 +97,7 @@ function finalquiz_create_attempt(quiz $quizobj, $attemptnumber, $lastattempt, $
         $userid = $USER->id;
     }
 
-    $quiz = $quizobj->get_quiz();
+    $quiz = $quizobj->get_finalquiz();
     if ($quiz->sumgrades < 0.000005 && $quiz->grade > 0.000005) {
         throw new moodle_exception('cannotstartgradesmismatch', 'finalquiz',
                 new moodle_url('/mod/finalquiz/view.php', array('q' => $quiz->id)),
@@ -163,7 +163,7 @@ function finalquiz_start_new_attempt($quizobj, $quba, $attempt, $attemptnumber, 
 
     // Usages for this user's previous quiz attempts.
     $qubaids = new \mod_finalquiz\question\qubaids_for_users_attempts(
-            $quizobj->get_quizid(), $attempt->userid);
+            $quizobj->get_finalquizid(), $attempt->userid);
 
     // Fully load all the questions in this quiz.
     $quizobj->preload_questions();
@@ -183,7 +183,7 @@ function finalquiz_start_new_attempt($quizobj, $quba, $attempt, $attemptnumber, 
             $randomfound = true;
             continue;
         }
-        if (!$quizobj->get_quiz()->shuffleanswers) {
+        if (!$quizobj->get_finalquiz()->shuffleanswers) {
             $questiondata->options->shuffleanswers = false;
         }
         $questions[$slot] = question_bank::make_question($questiondata);
@@ -2316,11 +2316,11 @@ function finalquiz_validate_new_attempt(finalquiz $quizobj, finalquiz_access_man
         // To force the creation of a new preview, we mark the current attempt (if any)
         // as finished. It will then automatically be deleted below.
         $DB->set_field('finalfinalquiz_attempts', 'state', finalquiz_attempt::FINISHED,
-                array('finalquiz' => $quizobj->get_quizid(), 'userid' => $USER->id));
+                array('finalquiz' => $quizobj->get_finalquizid(), 'userid' => $USER->id));
     }
 
     // Look for an existing attempt.
-    $attempts = finalquiz_get_user_attempts($quizobj->get_quizid(), $USER->id, 'all', true);
+    $attempts = finalquiz_get_user_attempts($quizobj->get_finalquizid(), $USER->id, 'all', true);
     $lastattempt = end($attempts);
 
     $attemptnumber = null;
@@ -2385,10 +2385,10 @@ function finalquiz_prepare_and_start_new_attempt(finalquiz $quizobj, $attemptnum
     global $DB, $USER;
 
     // Delete any previous preview attempts belonging to this user.
-    finalquiz_delete_previews($quizobj->get_quiz(), $USER->id);
+    finalquiz_delete_previews($quizobj->get_finalquiz(), $USER->id);
 
     $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-    $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+    $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
     // Create the new attempt and initialize the question sessions
     $timenow = time(); // Update time now, in case the server is running really slowly.

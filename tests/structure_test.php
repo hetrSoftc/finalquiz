@@ -707,7 +707,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
 
         $questiongenerator = $this->getDataGenerator()->get_plugin_generator('core_question');
         $cat = $questiongenerator->create_question_category();
-        quiz_add_random_questions($quizobj->get_quiz(), 1, $cat->id, 1, false);
+        quiz_add_random_questions($quizobj->get_finalquiz(), 1, $cat->id, 1, false);
         $structure = \mod_finalquiz\structure::create_for_quiz($quizobj);
         $randomq = $DB->get_record('question', array('qtype' => 'random'));
 
@@ -749,7 +749,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
         $q = $questiongenerator->create_question('truefalse', null,
                 array('name' => 'TF2', 'category' => $cat->id));
 
-        quiz_add_finalquiz_question($q->id, $quizobj->get_quiz(), 0);
+        quiz_add_finalquiz_question($q->id, $quizobj->get_finalquiz(), 0);
         $structure = \mod_finalquiz\structure::create_for_quiz($quizobj);
 
         $this->assert_finalquiz_layout(array(
@@ -770,7 +770,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
         $q = $questiongenerator->create_question('truefalse', null,
                 array('name' => 'TF3', 'category' => $cat->id));
 
-        quiz_add_finalquiz_question($q->id, $quizobj->get_quiz(), 1);
+        quiz_add_finalquiz_question($q->id, $quizobj->get_finalquiz(), 1);
 
         $structure = \mod_finalquiz\structure::create_for_quiz($quizobj);
         $this->assert_finalquiz_layout(array(
@@ -796,7 +796,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
         $q = $questiongenerator->create_question('truefalse', null,
                 array('name' => 'TF4', 'category' => $cat->id));
 
-        quiz_add_finalquiz_question($q->id, $quizobj->get_quiz(), 1);
+        quiz_add_finalquiz_question($q->id, $quizobj->get_finalquiz(), 1);
 
         $structure = \mod_finalquiz\structure::create_for_quiz($quizobj);
         $this->assert_finalquiz_layout(array(
@@ -822,7 +822,7 @@ class mod_finalquiz_structure_testcase extends advanced_testcase {
         $q = $questiongenerator->create_question('truefalse', null,
                 array('name' => 'TF3', 'category' => $cat->id));
 
-        quiz_add_finalquiz_question($q->id, $quizobj->get_quiz(), 0);
+        quiz_add_finalquiz_question($q->id, $quizobj->get_finalquiz(), 0);
 
         $structure = \mod_finalquiz\structure::create_for_quiz($quizobj);
         $this->assert_finalquiz_layout(array(

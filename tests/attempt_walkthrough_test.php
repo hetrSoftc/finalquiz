@@ -72,7 +72,7 @@ class mod_finalquiz_attempt_walkthrough_testcase extends advanced_testcase {
 
         // Start the attempt.
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
         $timenow = time();
         $attempt = quiz_create_attempt($quizobj, 1, false, $timenow, false, $user1->id);
@@ -172,7 +172,7 @@ class mod_finalquiz_attempt_walkthrough_testcase extends advanced_testcase {
 
             // Start the attempt.
             $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-            $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+            $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
             $timenow = time();
             $attempt = quiz_create_attempt($quizobj, 1, false, $timenow);
@@ -270,7 +270,7 @@ class mod_finalquiz_attempt_walkthrough_testcase extends advanced_testcase {
 
         // Start the attempt.
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
         $timenow = time();
         $attempt = quiz_create_attempt($quizobj, 1, false, $timenow);

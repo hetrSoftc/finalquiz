@@ -74,7 +74,7 @@ class slot_random {
      * @return mixed
      * @throws \coding_exception
      */
-    public function get_quiz() {
+    public function get_finalquiz() {
         global $DB;
 
         if (empty($this->quiz)) {
@@ -164,7 +164,7 @@ class slot_random {
             quiz_update_section_firstslots($this->record->quizid, 1, max($lastslotbefore, 1));
         } else {
             $lastslot = end($slots);
-            $quiz = $this->get_quiz();
+            $quiz = $this->get_finalquiz();
             if ($lastslot) {
                 $this->record->slot = $lastslot->slot + 1;
             } else {

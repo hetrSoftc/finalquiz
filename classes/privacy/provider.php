@@ -294,7 +294,7 @@ class provider implements
         }
 
         $quizobj = \finalquiz::create($cm->instance);
-        $quiz = $quizobj->get_quiz();
+        $quiz = $quizobj->get_finalquiz();
 
         // Handle the 'finalquizaccess' subplugin.
         manager::plugintype_class_callback(
@@ -333,7 +333,7 @@ class provider implements
 
             // Fetch the details of the data to be removed.
             $quizobj = \finalquiz::create($cm->instance);
-            $quiz = $quizobj->get_quiz();
+            $quiz = $quizobj->get_finalquiz();
             $user = $contextlist->get_user();
 
             // Handle the 'finalquizaccess' quizaccess.
@@ -346,7 +346,7 @@ class provider implements
 
             // Remove overrides for this user.
             $overrides = $DB->get_records('quiz_overrides' , [
-                'finalquiz' => $quizobj->get_quizid(),
+                'finalquiz' => $quizobj->get_finalquizid(),
                 'userid' => $user->id,
             ]);
 

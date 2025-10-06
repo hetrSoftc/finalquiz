@@ -249,7 +249,7 @@ class mod_finalquiz_attempt_walkthrough_from_csv_testcase extends advanced_testc
                 // Start the attempt.
                 $quizobj = quiz::create($this->quiz->id, $user->id);
                 $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-                $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+                $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
                 $prevattempts = quiz_get_user_attempts($this->quiz->id, $user->id, 'all', true);
                 $attemptnumber = count($prevattempts) + 1;
@@ -342,7 +342,7 @@ class mod_finalquiz_attempt_walkthrough_from_csv_testcase extends advanced_testc
                     break;
                 case 'quizgrade' :
                     // Check quiz grades.
-                    $grades = quiz_get_user_grades($attemptobj->get_quiz(), $attemptobj->get_userid());
+                    $grades = quiz_get_user_grades($attemptobj->get_finalquiz(), $attemptobj->get_userid());
                     $grade = array_shift($grades);
                     $this->assertEquals($value, $grade->rawgrade, "Quiz grade for attempt {$result['quizattempt']}.");
                     break;
@@ -350,7 +350,7 @@ class mod_finalquiz_attempt_walkthrough_from_csv_testcase extends advanced_testc
                     // Check grade book.
                     $gradebookgrades = grade_get_grades($attemptobj->get_courseid(),
                                                         'mod', 'finalquiz',
-                                                        $attemptobj->get_quizid(),
+                                                        $attemptobj->get_finalquizid(),
                                                         $attemptobj->get_userid());
                     $gradebookitem = array_shift($gradebookgrades->items);
                     $gradebookgrade = array_shift($gradebookitem->grades);

@@ -60,7 +60,7 @@ class mod_finalquiz_restore_date_testcase extends restore_date_testcase
         $quizobj = quiz::create($quiz->id);
         $attempt = quiz_create_attempt($quizobj, 1, false, $timestamp, false);
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
         quiz_start_new_attempt($quizobj, $quba, $attempt, 1, $timestamp);
         quiz_attempt_save_started($quizobj, $quba, $attempt);
 

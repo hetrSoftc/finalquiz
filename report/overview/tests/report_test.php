@@ -109,7 +109,7 @@ class quiz_overview_report_testcase extends advanced_testcase {
 
             $quizobj = quiz::create($quiz->id, $student->id);
             $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-            $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+            $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
             // Create the new attempt and initialize the question sessions.
             $attempt = quiz_create_attempt($quizobj, $attemptnumber, null, $timestart, false, $student->id);
@@ -144,7 +144,7 @@ class quiz_overview_report_testcase extends advanced_testcase {
                     $update->timemodified = $timestart + 1200;
                     $update->sumgrades = $quba->get_total_mark();
                     $DB->update_record('finalquiz_attempts', $update);
-                    quiz_save_best_grade($attemptobj->get_quiz(), $student->id);
+                    quiz_save_best_grade($attemptobj->get_finalquiz(), $student->id);
                     break;
             }
         }

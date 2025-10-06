@@ -91,7 +91,7 @@ if (data_submitted() && confirm_sesskey()) {
             'courseid' => $attemptobj->get_courseid(),
             'context' => context_module::instance($attemptobj->get_cmid()),
             'other' => array(
-                'quizid' => $attemptobj->get_quizid(),
+                'quizid' => $attemptobj->get_finalquizid(),
                 'attemptid' => $attemptobj->get_attemptid(),
                 'slot' => $slot
             )

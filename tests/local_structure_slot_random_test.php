@@ -115,7 +115,7 @@ class mod_finalquiz_local_structure_slot_random_test extends advanced_testcase {
         // The create_instance had injected an additional cmid propery to the quiz. Let's remove that.
         unset($quiz->cmid);
 
-        $this->assertEquals($quiz, $randomslot->get_quiz());
+        $this->assertEquals($quiz, $randomslot->get_finalquiz());
     }
 
     public function test_set_quiz() {

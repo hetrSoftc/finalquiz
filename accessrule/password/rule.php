@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/mod/finalquiz/accessrule/accessrulebase.php');
 class finalquizaccess_password extends finalquiz_access_rule_base {
 
     public static function make(qfinaluiz $quizobj, $timenow, $canignoretimelimits) {
-        if (empty($quizobj->get_quiz()->password)) {
+        if (empty($quizobj->get_finalquiz()->password)) {
             return null;
         }
 

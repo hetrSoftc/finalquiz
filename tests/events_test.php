@@ -77,7 +77,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
 
         // Start the attempt.
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
 
         $timenow = time();
         $attempt = quiz_create_attempt($quizobj, 1, false, $timenow, $ispreview);
@@ -116,7 +116,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $legacydata->userid = $attempt->userid;
         $legacydata->cmid = $quizobj->get_cmid();
         $legacydata->courseid = $quizobj->get_courseid();
-        $legacydata->quizid = $quizobj->get_quizid();
+        $legacydata->quizid = $quizobj->get_finalquizid();
         // Submitterid should be the user, but as we are in PHP Unit, CLI_SCRIPT is set to true which sets null in submitterid.
         $legacydata->submitterid = null;
         $legacydata->timefinish = $timefinish;
@@ -153,7 +153,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $legacydata->userid = $attempt->userid;
         $legacydata->cmid = $quizobj->get_cmid();
         $legacydata->courseid = $quizobj->get_courseid();
-        $legacydata->quizid = $quizobj->get_quizid();
+        $legacydata->quizid = $quizobj->get_finalquizid();
         $legacydata->submitterid = null; // Should be the user, but PHP Unit complains...
         $this->assertEventLegacyData($legacydata, $event);
         $this->assertEventContextNotUsed($event);
@@ -187,7 +187,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $legacydata->userid = $attempt->userid;
         $legacydata->cmid = $quizobj->get_cmid();
         $legacydata->courseid = $quizobj->get_courseid();
-        $legacydata->quizid = $quizobj->get_quizid();
+        $legacydata->quizid = $quizobj->get_finalquizid();
         $legacydata->submitterid = null; // Should be the user, but PHP Unit complains...
         $this->assertEventLegacyData($legacydata, $event);
         $this->assertEventContextNotUsed($event);
@@ -215,7 +215,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $this->assertEquals(context_module::instance($quizobj->get_cmid()), $event->get_context());
         // Check legacy log data.
         $expected = array($quizobj->get_courseid(), 'finalquiz', 'attempt', 'review.php?attempt=' . $attempt->id,
-            $quizobj->get_quizid(), $quizobj->get_cmid());
+            $quizobj->get_finalquizid(), $quizobj->get_cmid());
         $this->assertEventLegacyLogData($expected, $event);
         // Check legacy event data.
         $legacydata = new stdClass();
@@ -224,7 +224,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $legacydata->timestart = $attempt->timestart;
         $legacydata->timestamp = $attempt->timestart;
         $legacydata->userid = $attempt->userid;
-        $legacydata->quizid = $quizobj->get_quizid();
+        $legacydata->quizid = $quizobj->get_finalquizid();
         $legacydata->cmid = $quizobj->get_cmid();
         $legacydata->courseid = $quizobj->get_courseid();
         $this->assertEventLegacyData($legacydata, $event);
@@ -275,7 +275,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
 
         // Trigger and capture the event.
         $sink = $this->redirectEvents();
-        quiz_delete_attempt($attempt, $quizobj->get_quiz());
+        quiz_delete_attempt($attempt, $quizobj->get_finalquiz());
         $events = $sink->get_events();
         $event = reset($events);
 
@@ -297,7 +297,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
 
         // Delete a preview attempt, capturing events.
         $sink = $this->redirectEvents();
-        quiz_delete_attempt($previewattempt, $quizobj->get_quiz());
+        quiz_delete_attempt($previewattempt, $quizobj->get_finalquiz());
 
         // Verify that no events were generated.
         $this->assertEmpty($sink->get_events());
@@ -682,7 +682,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $this->assertInstanceOf('\mod_finalquiz\event\attempt_preview_started', $event);
         $this->assertEquals(context_module::instance($quizobj->get_cmid()), $event->get_context());
         $expected = array($quizobj->get_courseid(), 'finalquiz', 'preview', 'view.php?id=' . $quizobj->get_cmid(),
-            $quizobj->get_quizid(), $quizobj->get_cmid());
+            $quizobj->get_finalquizid(), $quizobj->get_cmid());
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
     }
@@ -701,7 +701,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
             'courseid' => $quizobj->get_courseid(),
             'context' => context_module::instance($quizobj->get_cmid()),
             'other' => array(
-                'quizid' => $quizobj->get_quizid(),
+                'quizid' => $quizobj->get_finalquizid(),
                 'attemptid' => 2,
                 'slot' => 3
             )
@@ -718,7 +718,7 @@ class mod_finalquiz_events_testcase extends advanced_testcase {
         $this->assertInstanceOf('\mod_finalquiz\event\question_manually_graded', $event);
         $this->assertEquals(context_module::instance($quizobj->get_cmid()), $event->get_context());
         $expected = array($quizobj->get_courseid(), 'finalquiz', 'manualgrade', 'comment.php?attempt=2&slot=3',
-            $quizobj->get_quizid(), $quizobj->get_cmid());
+            $quizobj->get_finalquizid(), $quizobj->get_cmid());
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
     }

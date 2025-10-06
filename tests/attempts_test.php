@@ -413,7 +413,7 @@ class mod_finalfinalquiz_attempt_overdue_testcase extends advanced_testcase {
         quiz_add_finalquiz_question($numq->id, $quiz);
         $quizobj = quiz::create($quiz->id, $user1->id);
         $quba = question_engine::make_questions_usage_by_activity('mod_finalquiz', $quizobj->get_context());
-        $quba->set_preferred_behaviour($quizobj->get_quiz()->preferredbehaviour);
+        $quba->set_preferred_behaviour($quizobj->get_finalquiz()->preferredbehaviour);
         $timenow = time();
         // Create an attempt.
         $attempt = quiz_create_attempt($quizobj, 1, false, $timenow, false, $user1->id);

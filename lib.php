@@ -418,9 +418,9 @@ function finalquiz_delete_all_attempts($quiz) {
 function finalquiz_delete_user_attempts($quiz, $user) {
     global $CFG, $DB;
     require_once($CFG->dirroot . '/mod/finalquiz/locallib.php');
-    question_engine::delete_questions_usage_by_activities(new qubaids_for_finalquiz_user($quiz->get_quizid(), $user->id));
+    question_engine::delete_questions_usage_by_activities(new qubaids_for_finalquiz_user($quiz->get_finalquizid(), $user->id));
     $params = [
-        'finalquiz' => $quiz->get_quizid(),
+        'finalquiz' => $quiz->get_finalquizid(),
         'userid' => $user->id,
     ];
     $DB->delete_records('finalfinalquiz_attempts', $params);
@@ -2187,7 +2187,7 @@ function mod_finalquiz_core_calendar_provide_event_action(calendar_event $event,
         return null;
     }
 
-    $attempts = quiz_get_user_attempts($quizobj->get_quizid(), $USER->id);
+    $attempts = quiz_get_user_attempts($quizobj->get_finalquizid(), $USER->id);
     if (!empty($attempts)) {
         // The student's last attempt is finished.
         return null;
