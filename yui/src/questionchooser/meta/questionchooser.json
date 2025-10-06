@@ -1,0 +1,9 @@
+{
+    "moodle-mod_finalquiz-questionchooser": {
+        "requires": [
+            "moodle-core-chooserdialogue",
+            "moodle-mod_finalquiz-util",
+            "querystring-parse"
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "moodle-mod_finalquiz-toolboxes",
+    "builds": {
+        "moodle-mod_finalquiz-toolboxes": {
+            "jsfiles": [
+                "toolbox.js",
+                "resource.js",
+                "section.js"
+            ]
+        }
+    }
+}

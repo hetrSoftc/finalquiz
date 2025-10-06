@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_finalquiz-modform",
+    "builds": {
+        "moodle-mod_finalquiz-modform": {
+            "jsfiles": [
+                "modform.js"
+            ]
+        }
+    }
+}

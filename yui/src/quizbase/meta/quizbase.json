@@ -1,0 +1,8 @@
+{
+    "moodle-mod_finalquiz-quizbase": {
+        "requires": [
+            "base",
+            "node"
+        ]
+    }
+}

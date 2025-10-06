@@ -1,0 +1,19 @@
+{
+    "moodle-mod_finalquiz-dragdrop": {
+        "requires": [
+            "base",
+            "node",
+            "io",
+            "dom",
+            "dd",
+            "dd-scroll",
+            "moodle-core-dragdrop",
+            "moodle-core-notification",
+            "moodle-mod_finalquiz-quizbase",
+            "moodle-mod_finalquiz-util-base",
+            "moodle-mod_finalquiz-util-page",
+            "moodle-mod_finalquiz-util-slot",
+            "moodle-course-util"
+        ]
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "moodle-mod_finalquiz-util": {
+    "requires": [
+        "node", "moodle-core-actionmenu"
+    ],
+    "use": [
+        "moodle-mod_finalquiz-util-base"
+    ],
+    "submodules": {
+        "moodle-mod_finalquiz-util-base": {
+        },
+        "moodle-mod_finalquiz-util-slot": {
+            "requires": [
+                "node",
+                "moodle-mod_finalquiz-util-base"
+            ]
+        },
+        "moodle-mod_finalquiz-util-page": {
+            "requires": [
+                "node",
+                "moodle-mod_finalquiz-util-base"
+            ]
+        }
+    }
+  }
+}

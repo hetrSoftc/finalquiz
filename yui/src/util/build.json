@@ -1,0 +1,21 @@
+{
+  "name": "moodle-mod_finalquiz-util",
+  "builds": {
+    "moodle-mod_finalquiz-util-base": {
+      "jsfiles": [
+        "base.js"
+      ]
+    },
+    "moodle-mod_finalquiz-util-slot": {
+      "jsfiles": [
+        "slot.js"
+      ]
+    }
+    ,
+    "moodle-mod_finalquiz-util-page": {
+      "jsfiles": [
+        "page.js"
+      ]
+    }
+  }
+}

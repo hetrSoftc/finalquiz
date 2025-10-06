@@ -1,0 +1,14 @@
+{
+    "moodle-mod_finalquiz-toolboxes": {
+        "requires": [
+            "base",
+            "node",
+            "event",
+            "event-key",
+            "io",
+            "moodle-mod_finalquiz-quizbase",
+            "moodle-mod_finalquiz-util-slot",
+            "moodle-core-notification-ajaxexception"
+        ]
+    }
+}
